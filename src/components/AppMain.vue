@@ -17,7 +17,7 @@ export default {
         <h1>Pokedex</h1>
         <div class="pokedex">
             <div v-for="pokemon in store.docs" class="card">
-                <PokeCard :store="pokemon" />
+                <PokeCard :image="pokemon.imageUrl" :name="pokemon.name" :type="pokemon.type1" />
             </div>
         </div>
     </div>
@@ -31,6 +31,8 @@ export default {
 .pokedex {
     display: flex;
     flex-wrap: wrap;
+    background-color: slategrey;
+    padding: 20px;
 
 }
 
@@ -39,13 +41,17 @@ p {
 }
 
 .card {
-    width: calc(100% / 5 - 40px);
+    width: calc(100% / 5 - 50px);
     min-height: 250px;
     padding: 20px;
+    margin: 5px;
     background-color: lightseagreen;
 }
 
 img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20%;
 }
 </style>
