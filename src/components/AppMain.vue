@@ -17,7 +17,7 @@ export default {
         <h1>Pokedex</h1>
         <div class="pokedex">
             <div v-for="pokemon in store.docs" class="card">
-                <PokeCard :image="pokemon.imageUrl" :name="pokemon.name" :type="pokemon.type1" />
+                <PokeCard :image="pokemon.imageUrl" :name="pokemon.name" :type="pokemon.type1" :number="pokemon.number" />
             </div>
         </div>
     </div>
@@ -34,10 +34,6 @@ export default {
     background-color: slategrey;
     padding: 20px;
 
-}
-
-p {
-    text-align: center;
 }
 
 .card {
