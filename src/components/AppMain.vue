@@ -9,11 +9,15 @@ export default {
         return {
             store,
         }
-    }
+    },
 }
 </script>
 <template>
-    <div class="container">
+    <div v-if="store.isLoading" class="loading">
+        <h1>Loading...</h1>
+        <font-awesome-icon icon="fa-solid fa-spinner" class="fa-4x fa-spin" />
+    </div>
+    <div v-else class="container">
         <h1>Pokedex</h1>
         <div class="pokedex">
             <div v-for="pokemon in store.docs" class="card">
@@ -22,7 +26,24 @@ export default {
         </div>
     </div>
 </template>
-<style>
+<style lang="scss">
+.loading {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+    >h1 {
+        font-size: 5rem;
+    }
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;

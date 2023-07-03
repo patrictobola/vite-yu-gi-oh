@@ -1,2 +1,5 @@
 import {reactive} from 'vue';
-export const store = reactive({docs: []})
+export const store = reactive({
+    docs: [],
+    isLoading: false
+})
