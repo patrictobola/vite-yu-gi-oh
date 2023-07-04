@@ -63,6 +63,8 @@ export default {
 
 <template>
     <div class="container">
+        <p>Non ho curato la grafica per concentrarmi sulla logica. Ho forzato un po' la situazione $emit a fini didattici e
+            soprattutto per cercare di capirli al meglio.</p>
         <h1>Pokedex</h1>
         <PaginationButtons @next-page="fetchChangePage" @prev-page="fetchChangePage" />
 
