@@ -8,16 +8,21 @@ export default {
   components: {
     AppMain,
   },
+  methods: {
+    fetchPokemons() {
+      store.isLoading = true
+      axios.get(endpoint).then(res => {
+        store.docs = res.data.docs;
+      }).catch(err => {
+        console.error(err.message);
+      }).then(() => {
+        store.isLoading = false;
+      })
+    }
+  },
 
   created() {
-    store.isLoading = true
-    axios.get(endpoint).then(res => {
-      store.docs = res.data.docs;
-    }).catch(err => {
-      console.error(err.message);
-    }).then(() => {
-      store.isLoading = false;
-    })
+    this.fetchPokemons()
   }
 }
 </script>

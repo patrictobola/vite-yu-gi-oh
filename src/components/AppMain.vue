@@ -1,9 +1,11 @@
 <script>
 import { store } from '../data/store';
 import PokeCard from '../components/pokedex/PokeCard.vue';
+import LoadingMessage from '../components/LoadingMessage.vue';
 export default {
     components: {
         PokeCard,
+        LoadingMessage,
     },
     data() {
         return {
@@ -13,10 +15,7 @@ export default {
 }
 </script>
 <template>
-    <div v-if="store.isLoading" class="loading">
-        <h1>Loading...</h1>
-        <font-awesome-icon icon="fa-solid fa-spinner" class="fa-4x fa-spin" />
-    </div>
+    <LoadingMessage v-if="store.isLoading" />
     <div v-else class="container">
         <h1>Pokedex</h1>
         <div class="pokedex">
