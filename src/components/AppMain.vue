@@ -10,6 +10,7 @@ export default {
     data() {
         return store
     },
+
 }
 </script>
 <template>

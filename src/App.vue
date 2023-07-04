@@ -8,6 +8,11 @@ export default {
   components: {
     AppMain,
   },
+  data() {
+    return {
+      selectedType: ''
+    }
+  },
   methods: {
     fetchPokemons() {
       store.isLoading = true
@@ -18,11 +23,27 @@ export default {
       }).then(() => {
         store.isLoading = false;
       })
+    },
+    fetchPokemonType() {
+      const pokemonTypeEndpoint = "https://41tyokboji.execute-api.eu-central-1.amazonaws.com/dev/api/v1/pokemons/types1";
+      axios.get(pokemonTypeEndpoint).then(res => {
+        store.pokemonType = res.data;
+        console.log(store.pokemonType)
+      })
+    },
+    fetchOptions(option) {
+      const endpoint = "https://41tyokboji.execute-api.eu-central-1.amazonaws.com/dev/api/v1/pokemons?eq[type1]=";
+      axios.get(`${endpoint}${option}`).then(res => {
+        store.docs = res.data.docs;
+        console.log(store.docs)
+      })
+      console.log(option)
     }
   },
 
   created() {
-    this.fetchPokemons()
+    this.fetchPokemons();
+    this.fetchPokemonType()
   }
 }
 </script>

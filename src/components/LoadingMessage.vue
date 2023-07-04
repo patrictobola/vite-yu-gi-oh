@@ -6,7 +6,7 @@
         <font-awesome-icon icon="fa-solid fa-spinner" class="fa-4x fa-spin" />
     </div>
 </template>
-<style>
+<style lang="scss">
 .loading {
     position: fixed;
     top: 0;
