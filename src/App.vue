@@ -14,6 +14,19 @@ export default {
     }
   },
   methods: {
+    fetchPages() {
+      store.isLoading = true
+      axios.get(endpoint).then(res => {
+        store.prevPage = res.data.prevPage;
+        store.nextPage = res.data.nextPage;
+        store.hasPrevPage = res.data.hasPrevPage;
+        store.hasNextPage = res.data.hasNextPage;
+      }).catch(err => {
+        console.error(err.message);
+      }).then(() => {
+        store.isLoading = false;
+      })
+    },
     fetchPokemons() {
       store.isLoading = true
       axios.get(endpoint).then(res => {
@@ -34,7 +47,8 @@ export default {
 
   created() {
     this.fetchPokemons();
-    this.fetchPokemonType()
+    this.fetchPokemonType();
+    this.fetchPages();
   }
 }
 </script>

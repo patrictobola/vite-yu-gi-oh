@@ -2,7 +2,8 @@
 import { store } from '../../data/store';
 import PokeCard from '../pokedex/PokeCard.vue'
 import SearchSelect from './SearchSelect.vue';
-import SearchForm from './SearchForm.vue'
+import SearchForm from './SearchForm.vue';
+import PaginationButtons from './PaginationButtons.vue';
 // Creo due variabili con endpoint diversi, uno per avere quello base, cioè tutti i pokemon e il secondo per filtrare quelli necessari 
 const typeEndpoint = "https://41tyokboji.execute-api.eu-central-1.amazonaws.com/dev/api/v1/pokemons?eq[type1]=";
 const nameEndpoint = "https://41tyokboji.execute-api.eu-central-1.amazonaws.com/dev/api/v1/pokemons?q[name]=";
@@ -14,6 +15,7 @@ export default {
         PokeCard,
         SearchSelect,
         SearchForm,
+        PaginationButtons
     },
     data() {
         return {
@@ -28,6 +30,10 @@ export default {
             store.isLoading = true
             axios.get(`${baseUri}${option}`).then(res => {
                 store.docs = res.data.docs;
+                store.nextPage = res.data.nextPage;
+                store.prevPage = res.data.prevPage;
+                store.hasNextPage = res.data.hasNextPage;
+                store.hasPrevPage = res.data.hasPrevPage;
             }).catch(err => {
                 console.error(err.message);
             }).then(() => {
@@ -45,6 +51,11 @@ export default {
             if (!this.searchedWord) {
                 this.fetchPokemons(endpoint, this.searchedWord)
             } else this.fetchPokemons(nameEndpoint, this.searchedWord)
+        },
+        fetchChangePage(page) {
+            const endpoint = "https://41tyokboji.execute-api.eu-central-1.amazonaws.com/dev/api/v1/pokemons?page=";
+            this.fetchPokemons(endpoint, page)
+            console.log(page)
         }
     }
 }
@@ -53,6 +64,7 @@ export default {
 <template>
     <div class="container">
         <h1>Pokedex</h1>
+        <PaginationButtons @next-page="fetchChangePage" @prev-page="fetchChangePage" />
 
         <SearchSelect @selected-option="fetchSelectedOption">Cerca quì il tuo pokemon per tipo:</SearchSelect>
 
