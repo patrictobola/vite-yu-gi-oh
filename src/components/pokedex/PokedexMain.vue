@@ -1,14 +1,18 @@
 <script>
 import { store } from '../../data/store';
 import PokeCard from '../pokedex/PokeCard.vue'
-
+import SearchSelect from './SearchSelect.vue';
 export default {
     components: {
-        PokeCard
+        PokeCard,
+        SearchSelect
     },
     data() {
-        return store
-    }
+        return {
+            store,
+
+        }
+    },
 }
 
 
@@ -16,9 +20,11 @@ export default {
 <template>
     <div class="container">
         <h1>Pokedex</h1>
+        <SearchSelect @selected-option="console.log($event)">Cerca quì il tuo pokemon per tipo:</SearchSelect>
         <div class="pokedex">
-            <div v-for="pokemon in docs" class="card">
-                <PokeCard :image="pokemon.imageUrl" :name="pokemon.name" :type="pokemon.type1" :number="pokemon.number" />
+            <div v-for="pokemon in store.docs" class="card">
+                <PokeCard :image="pokemon.imageUrl" :key="pokemon._id" :name="pokemon.name" :type="pokemon.type1"
+                    :number="pokemon.number" />
             </div>
         </div>
     </div>
