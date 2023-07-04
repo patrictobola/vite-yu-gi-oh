@@ -3,21 +3,20 @@ import { store } from '../../data/store';
 export default {
     data() {
         return {
-            selectedType: '',
+            selectedOption: '',
             options: store.pokemonType
         }
     },
-    emits: ['selected-option'],
 }
 </script>
 <template>
     <div>
         <slot></slot>
-        <select name="option" id="options" v-model="selectedType">
+        <select name="option" id="options" v-model="selectedOption">
             <option value="" selected>Tutti</option>
-            <option v-for="option in options" :value="pokemon">{{ option }}</option>
+            <option v-for="option in options" :value="option">{{ option }}</option>
         </select>
-        <button @click="$emit('selected-option', selectedType)">Cerca!</button>
+        <button @click="$emit('selected-option', selectedOption)">Cerca!</button>
     </div>
 </template>
 <style></style>
