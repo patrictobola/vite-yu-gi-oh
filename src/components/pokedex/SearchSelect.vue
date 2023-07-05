@@ -4,9 +4,11 @@ export default {
     data() {
         return {
             selectedOption: '',
-            options: store.pokemonType
         }
     },
+    props: {
+        options: Array
+    }
 }
 </script>
 <template>

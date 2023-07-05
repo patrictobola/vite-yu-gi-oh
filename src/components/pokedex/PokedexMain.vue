@@ -21,7 +21,8 @@ export default {
         return {
             store,
             selectedOption: '',
-            searchedWord: ''
+            searchedWord: '',
+            pokemonType: store.pokemonType
         }
     },
     methods: {
@@ -68,7 +69,8 @@ export default {
         <h1>Pokedex</h1>
         <PaginationButtons @next-page="fetchChangePage" @prev-page="fetchChangePage" />
 
-        <SearchSelect @selected-option="fetchSelectedOption">Cerca quì il tuo pokemon per tipo:</SearchSelect>
+        <SearchSelect :options="pokemonType" @selected-option="fetchSelectedOption">Cerca quì il tuo pokemon per tipo:
+        </SearchSelect>
 
         <SearchForm @searched-word="fetchSearchedWord" placeholder="Cerca il tuo pokemon" />
 
